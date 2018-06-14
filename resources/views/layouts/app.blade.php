@@ -4,76 +4,61 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>Nobar</title>
+    {{ Html::style('plugin/bootstrap/dist/css/bootstrap.min.css') }}
+    {{ Html::style('plugin/font-awesome/css/font-awesome.min.css') }}
+    {{ Html::style('plugin/Ionicons/css/ionicons.min.css') }}
+    {{ Html::style('css/AdminLTE.css') }}
+    {{ Html::style('css/skins/_all-skins.min.css') }}
+    {{-- <Table> --}}
+    {{ Html::style('plugin/datatables.net-bs/css/dataTables.bootstrap.min.css') }}
+    {{-- {{ Html::style('plugin/morris.js/morris.css') }}
+    {{ Html::style('plugin/jvectormap/jquery-jvectormap.css') }}
+    {{ Html::style('plugin/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}
+    {{ Html::style('plugin/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}
+    {{ Html::style('plugin/bootstrap-daterangepicker/daterangepicker.css') }}
+    {{ Html::style('plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }} --}}
+    {{ Html::style('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic') }}
+    {{ Html::style('plugin/iCheck/square/blue.css') }}
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
+    @auth
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            @include('layouts.template.header')
+            @include('layouts.template.aside')
             @yield('content')
-        </main>
-    </div>
+            @include('layouts.template.footer')
+        </div>
+    @else
+    <body class="hold-transition login-page">
+            @yield('login')
+    @endauth
+   
+    <!-- ./wrapper -->
+    {{ Html::script('plugin/jquery/dist/jquery.min.js') }}
+    {{ Html::script('plugin/jquery-ui/jquery-ui.min.js') }}
+    {{ Html::script('plugin/bootstrap/dist/js/bootstrap.min.js') }}
+    {{ Html::script('plugin/raphael/raphael.min.js') }}
+    {{ Html::script('plugin/morris.js/morris.min.js') }}
+    {{-- {{ Html::script('plugin/jquery-sparkline/dist/jquery.sparkline.min.js') }}
+    {{ Html::script('plugin/jvectormap/jquery-jvectormap-1.2.2.min.js') }}
+    {{ Html::script('plugin/jvectormap/jquery-jvectormap-world-mill-en.js') }} --}}
+    {{ Html::script('plugin/jquery-knob/dist/jquery.knob.min.js') }}
+    {{ Html::script('plugin/moment/min/moment.min.js') }} 
+    {{-- {{ Html::script('plugin/bootstrap-daterangepicker/daterangepicker.js') }}
+    {{ Html::script('plugin/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}
+    {{ Html::script('plugin/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }} --}}
+    {{ Html::script('plugin/jquery-slimscroll/jquery.slimscroll.min.js') }}
+    {{ Html::script('plugin/fastclick/lib/fastclick.js') }}
+    @stack('scripts')   
+    {{-- <table> --}}
+    {{ Html::script('plugin/datatables.net/js/jquery.dataTables.min.js') }}
+    {{ Html::script('plugin/datatables.net-bs/js/dataTables.bootstrap.min.js') }}
+
+    {{ Html::script('js/adminlte.min.js') }}
+    {{-- {{ Html::script('js/pages/dashboard.js') }} --}}
+    {{ Html::script('js/demo.js') }}
 </body>
 </html>
