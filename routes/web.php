@@ -56,5 +56,15 @@ Route::post('menu/update/{id}', 'MenuController@update')->name('menu/update');//
 //--------------------  order -----------------------------------//
 Route::resource('order', 'OrderController');  //list menu
 Route::post('add/order','OrderController@store');  // add order
-
 Route::get('delete/order/{id}','OrderController@destroy');
+
+
+
+//js
+Route::get('get/data/menu','OrderController@get_data_menu');
+Route::get('get/data/order/{id}','OrderController@get_data_order');
+
+
+
+
+
